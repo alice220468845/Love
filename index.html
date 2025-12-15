@@ -111,16 +111,18 @@
 <body class="text-gray-700 flex flex-col items-center py-10 px-4 sm:px-6">
 
     <!-- Header Section -->
-    <header class="text-center mb-12 animate-fade-in w-full max-w-4xl relative z-30">
+    <!-- Flex layout: Stacked on mobile (flex-col), Side-by-side on desktop (md:flex-row) -->
+    <header class="mb-12 animate-fade-in w-full max-w-5xl relative z-30 flex flex-col md:flex-row items-center justify-center gap-8 md:gap-10">
+        
         <!-- Profile Image Section -->
-        <div class="relative inline-block mb-6 group">
+        <div class="relative flex-shrink-0 group">
             <!-- Glow effect behind -->
             <div class="absolute -inset-2 bg-gradient-to-r from-rose-200 via-pink-300 to-rose-200 rounded-[2.5rem] blur-md opacity-70 group-hover:opacity-100 transition duration-500"></div>
             
-            <!-- Main Image container with Squircle shape (Rounded Square) -->
+            <!-- Main Image container with Squircle shape -->
             <div class="relative w-48 h-48 sm:w-56 sm:h-56 rounded-[2rem] bg-white p-1.5 shadow-xl border border-white/50 backdrop-blur-sm">
-                <!-- Image Updated Here -->
-                <img src="http://www.tiffany.com.tw/images/alicecho001.png" alt="愛妮老師" 
+                <!-- Image Updated with HTTPS link -->
+                <img src="https://www.puffy.com.tw/images/alicecho001.png" alt="愛妮老師" 
                      class="w-full h-full object-cover rounded-[1.7rem] bg-rose-50"
                      onerror="this.onerror=null; this.parentElement.innerHTML='<div class=\'w-full h-full flex items-center justify-center bg-rose-50 rounded-[1.7rem] text-rose-300\'><i class=\'fa-solid fa-user text-6xl\'></i></div>'">
             </div>
@@ -131,12 +133,16 @@
             </div>
         </div>
 
-        <h1 class="text-3xl md:text-5xl font-bold text-rose-800 tracking-wide mb-3 drop-shadow-sm text-shadow-white mt-2">
-            認知強化不失憶
-        </h1>
-        <h2 class="text-xl md:text-2xl font-medium text-rose-600 bg-white/40 inline-block px-6 py-1.5 rounded-full backdrop-blur-md shadow-sm">
-            愛妮老師的教學資源網
-        </h2>
+        <!-- Title Section -->
+        <div class="text-center md:text-left flex flex-col items-center md:items-start">
+            <h1 class="text-3xl md:text-5xl font-bold text-rose-800 tracking-wide mb-3 drop-shadow-sm text-shadow-white mt-2">
+                認知強化不失憶
+            </h1>
+            <h2 class="text-xl md:text-2xl font-medium text-rose-600 bg-white/40 inline-block px-6 py-1.5 rounded-full backdrop-blur-md shadow-sm">
+                愛妮老師的教學資源網
+            </h2>
+        </div>
+
     </header>
 
     <!-- Links Grid Container -->
