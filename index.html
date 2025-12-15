@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>認知強化不失憶-愛妮老師</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Noto Sans TC -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        body {
+            font-family: 'Noto Sans TC', sans-serif;
+            background-color: #fdf2f8; /* pink-50 */
+            background-image: 
+                radial-gradient(at 0% 0%, hsla(330,98%,85%,1) 0, transparent 50%), 
+                radial-gradient(at 50% 100%, hsla(339,100%,89%,1) 0, transparent 50%), 
+                radial-gradient(at 100% 0%, hsla(320,100%,92%,1) 0, transparent 50%);
+            background-attachment: fixed;
+            min-height: 100vh;
+        }
+        
+        /* Card Base Styles */
+        .preview-card {
+            position: relative;
+            overflow: hidden;
+            border: 2px solid rgba(255, 255, 255, 0.8);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            background-color: #fff1f2; /* pink-50 fallback */
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+
+        .preview-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 20px 25px -5px rgba(244, 63, 94, 0.3), 0 10px 10px -5px rgba(244, 63, 94, 0.1);
+            border-color: #fb7185; /* rose-400 */
+            z-index: 10;
+        }
+
+        /* Iframe styling - Full Cover */
+        .iframe-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 400%; /* Render 4x wider */
+            height: 400%; /* Render 4x taller */
+            border: 0;
+            transform: scale(0.25); /* Scale down to 25% to fit */
+            transform-origin: top left;
+            pointer-events: none; /* Disable interaction */
+            z-index: 0;
+            opacity: 0.85; /* Much clearer now */
+            transition: opacity 0.5s ease, filter 0.5s ease;
+            filter: saturate(0.9); /* Slightly desaturated normally */
+        }
+        
+        /* On hover, make it vivid and fully opaque */
+        .preview-card:hover .iframe-background {
+            opacity: 1;
+            filter: saturate(1.1);
+        }
+
+        /* Gradient Overlay - Only at bottom for text readability */
+        .content-overlay {
+            position: absolute;
+            inset: 0;
+            /* Transparent at top, fading to white/pink at bottom */
+            background: linear-gradient(to bottom, 
+                rgba(255,255,255,0) 0%, 
+                rgba(255,255,255,0.1) 40%, 
+                rgba(255,241,242,0.9) 75%, 
+                rgba(255,241,242,1) 100%);
+            z-index: 10;
+            transition: opacity 0.4s ease;
+        }
+
+        /* Content styling */
+        .card-content {
+            position: relative;
+            z-index: 20;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end; /* Push content to bottom */
+            padding-bottom: 1.5rem;
+        }
+
+        /* Icon Container with Glass effect */
+        .icon-container {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(4px);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        /* Animation */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fade-in { animation: fadeIn 0.8s ease-out forwards; }
+        .delay-100 { animation-delay: 0.1s; }
+        .delay-200 { animation-delay: 0.2s; }
+        .delay-300 { animation-delay: 0.3s; }
+        .delay-400 { animation-delay: 0.4s; }
+        .delay-500 { animation-delay: 0.5s; }
+    </style>
+</head>
+<body class="text-gray-700 flex flex-col items-center py-10 px-4 sm:px-6">
+
+    <!-- Header Section -->
+    <header class="text-center mb-12 animate-fade-in w-full max-w-4xl relative z-30">
+        <!-- Profile Image Section -->
+        <div class="relative inline-block mb-6 group">
+            <!-- Glow effect behind -->
+            <div class="absolute -inset-2 bg-gradient-to-r from-rose-200 via-pink-300 to-rose-200 rounded-[2.5rem] blur-md opacity-70 group-hover:opacity-100 transition duration-500"></div>
+            
+            <!-- Main Image container with Squircle shape (Rounded Square) -->
+            <div class="relative w-48 h-48 sm:w-56 sm:h-56 rounded-[2rem] bg-white p-1.5 shadow-xl border border-white/50 backdrop-blur-sm">
+                <!-- Image -->
+                <img src="http://www.tiffany.com.tw/images/alicecho001.png" alt="愛妮老師" 
+                     class="w-full h-full object-cover rounded-[1.7rem] bg-rose-50"
+                     onerror="this.onerror=null; this.parentElement.innerHTML='<div class=\'w-full h-full flex items-center justify-center bg-rose-50 rounded-[1.7rem] text-rose-300\'><i class=\'fa-solid fa-user text-6xl\'></i></div>'">
+            </div>
+            
+            <!-- Small decorative heart badge -->
+            <div class="absolute -bottom-2 -right-2 bg-white p-2 rounded-full shadow-lg border-2 border-rose-100 animate-bounce" style="animation-duration: 2s;">
+                <i class="fa-solid fa-heart text-rose-500 text-xl"></i>
+            </div>
+        </div>
+
+        <h1 class="text-3xl md:text-5xl font-bold text-rose-800 tracking-wide mb-3 drop-shadow-sm text-shadow-white mt-2">
+            認知強化不失憶
+        </h1>
+        <h2 class="text-xl md:text-2xl font-medium text-rose-600 bg-white/40 inline-block px-6 py-1.5 rounded-full backdrop-blur-md shadow-sm">
+            愛妮老師的教學資源網
+        </h2>
+    </header>
+
+    <!-- Links Grid Container -->
+    <main class="w-full max-w-6xl grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 px-2">
+
+        <!-- Link 1: Old Song -->
+        <a href="https://alice220468845.github.io/old-song/" target="_blank" class="preview-card rounded-2xl h-80 group cursor-pointer animate-fade-in delay-100">
+            <!-- Background Website -->
+            <iframe src="https://alice220468845.github.io/old-song/" class="iframe-background" scrolling="no" title="Old Song Preview"></iframe>
+            <!-- Gradient Overlay -->
+            <div class="content-overlay"></div>
+            <!-- Content -->
+            <div class="card-content px-6 text-center">
+                <!-- Icon floating above -->
+                <div class="absolute top-4 right-4 icon-container w-10 h-10 rounded-full flex items-center justify-center transition-transform duration-300 group-hover:scale-110">
+                    <i class="fa-solid fa-music text-rose-500 text-lg"></i>
+                </div>
+                
+                <div class="mt-auto transform transition-transform duration-300 group-hover:-translate-y-1">
+                    <h3 class="text-2xl font-bold text-rose-800 mb-1 group-hover:text-rose-600 transition-colors">懷舊老歌</h3>
+                    <p class="text-sm text-gray-500 font-medium mb-3">Old Song</p>
+                    <span class="inline-block text-xs font-bold text-white bg-rose-400 px-5 py-2 rounded-full shadow-md group-hover:bg-rose-500 transition-all hover:shadow-lg">
+                        進入網站 <i class="fa-solid fa-arrow-right ml-1"></i>
+                    </span>
+                </div>
+            </div>
+        </a>
+
+        <!-- Link 2: Old Picture -->
+        <a href="https://alice220468845.github.io/oldpicture/" target="_blank" class="preview-card rounded-2xl h-80 group cursor-pointer animate-fade-in delay-200">
+            <iframe src="https://alice220468845.github.io/oldpicture/" class="iframe-background" scrolling="no" title="Old Picture Preview"></iframe>
+            <div class="content-overlay"></div>
+            <div class="card-content px-6 text-center">
+                <div class="absolute top-4 right-4 icon-container w-10 h-10 rounded-full flex items-center justify-center transition-transform duration-300 group-hover:scale-110">
+                    <i class="fa-solid fa-images text-rose-500 text-lg"></i>
+                </div>
+                <div class="mt-auto transform transition-transform duration-300 group-hover:-translate-y-1">
+                    <h3 class="text-2xl font-bold text-rose-800 mb-1 group-hover:text-rose-600 transition-colors">懷舊照片</h3>
+                    <p class="text-sm text-gray-500 font-medium mb-3">Old Picture</p>
+                    <span class="inline-block text-xs font-bold text-white bg-rose-400 px-5 py-2 rounded-full shadow-md group-hover:bg-rose-500 transition-all hover:shadow-lg">
+                        進入網站 <i class="fa-solid fa-arrow-right ml-1"></i>
+                    </span>
+                </div>
+            </div>
+        </a>
+
+        <!-- Link 3: Richman -->
+        <a href="https://alice220468845.github.io/richman/" target="_blank" class="preview-card rounded-2xl h-80 group cursor-pointer animate-fade-in delay-300">
+            <iframe src="https://alice220468845.github.io/richman/" class="iframe-background" scrolling="no" title="Richman Preview"></iframe>
+            <div class="content-overlay"></div>
+            <div class="card-content px-6 text-center">
+                <div class="absolute top-4 right-4 icon-container w-10 h-10 rounded-full flex items-center justify-center transition-transform duration-300 group-hover:scale-110">
+                    <i class="fa-solid fa-dice text-rose-500 text-lg"></i>
+                </div>
+                <div class="mt-auto transform transition-transform duration-300 group-hover:-translate-y-1">
+                    <h3 class="text-2xl font-bold text-rose-800 mb-1 group-hover:text-rose-600 transition-colors">大富翁遊戲</h3>
+                    <p class="text-sm text-gray-500 font-medium mb-3">Richman Game</p>
+                    <span class="inline-block text-xs font-bold text-white bg-rose-400 px-5 py-2 rounded-full shadow-md group-hover:bg-rose-500 transition-all hover:shadow-lg">
+                        進入網站 <i class="fa-solid fa-arrow-right ml-1"></i>
+                    </span>
+                </div>
+            </div>
+        </a>
+
+        <!-- Link 4: Love Richman -->
+        <a href="https://alice220468845.github.io/loverichman/" target="_blank" class="preview-card rounded-2xl h-80 group cursor-pointer animate-fade-in delay-400">
+            <iframe src="https://alice220468845.github.io/loverichman/" class="iframe-background" scrolling="no" title="Love Richman Preview"></iframe>
+            <div class="content-overlay"></div>
+            <div class="card-content px-6 text-center">
+                <div class="absolute top-4 right-4 icon-container w-10 h-10 rounded-full flex items-center justify-center transition-transform duration-300 group-hover:scale-110">
+                    <i class="fa-solid fa-hand-holding-heart text-rose-500 text-lg"></i>
+                </div>
+                <div class="mt-auto transform transition-transform duration-300 group-hover:-translate-y-1">
+                    <h3 class="text-2xl font-bold text-rose-800 mb-1 group-hover:text-rose-600 transition-colors">愛心大富翁</h3>
+                    <p class="text-sm text-gray-500 font-medium mb-3">Love Richman</p>
+                    <span class="inline-block text-xs font-bold text-white bg-rose-400 px-5 py-2 rounded-full shadow-md group-hover:bg-rose-500 transition-all hover:shadow-lg">
+                        進入網站 <i class="fa-solid fa-arrow-right ml-1"></i>
+                    </span>
+                </div>
+            </div>
+        </a>
+
+        <!-- Link 5: Activities Group -->
+        <a href="https://alice220468845.github.io/activitiesgroup/" target="_blank" class="preview-card rounded-2xl h-80 group cursor-pointer animate-fade-in delay-500 md:col-span-2 lg:col-span-1">
+            <iframe src="https://alice220468845.github.io/activitiesgroup/" class="iframe-background" scrolling="no" title="Group Activities Preview"></iframe>
+            <div class="content-overlay"></div>
+            <div class="card-content px-6 text-center">
+                <div class="absolute top-4 right-4 icon-container w-10 h-10 rounded-full flex items-center justify-center transition-transform duration-300 group-hover:scale-110">
+                    <i class="fa-solid fa-users text-rose-500 text-lg"></i>
+                </div>
+                <div class="mt-auto transform transition-transform duration-300 group-hover:-translate-y-1">
+                    <h3 class="text-2xl font-bold text-rose-800 mb-1 group-hover:text-rose-600 transition-colors">團體活動</h3>
+                    <p class="text-sm text-gray-500 font-medium mb-3">Group Activities</p>
+                    <span class="inline-block text-xs font-bold text-white bg-rose-400 px-5 py-2 rounded-full shadow-md group-hover:bg-rose-500 transition-all hover:shadow-lg">
+                        進入網站 <i class="fa-solid fa-arrow-right ml-1"></i>
+                    </span>
+                </div>
+            </div>
+        </a>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="mt-16 text-center text-rose-700/60 text-sm animate-fade-in delay-500 relative z-20">
+        <p>&copy; 2024 愛妮老師教學資源. All rights reserved.</p>
+        <div class="mt-2 text-xl space-x-2">
+            <i class="fa-brands fa-pagelines"></i>
+        </div>
+    </footer>
+
+</body>
+</html>
